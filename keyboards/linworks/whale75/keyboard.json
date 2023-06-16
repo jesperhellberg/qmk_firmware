@@ -21,6 +21,9 @@
             "rainbow_swirl": true
         }
     },
+    "rgblight": {
+        "sleep": true
+    },
     "ws2812": {
         "pin": "B9",
         "driver": "pwm"
