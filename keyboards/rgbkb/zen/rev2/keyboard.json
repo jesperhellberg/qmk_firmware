@@ -53,6 +53,9 @@
         "twinkle": true
       }
     },
+    "rgblight": {
+      "led_count": 34
+    },
     "ws2812": {
       "pin": "B6"
     },

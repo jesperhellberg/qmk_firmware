@@ -30,6 +30,9 @@
             "twinkle": true
         }
     },
+    "rgblight": {
+        "led_count": 6
+    },
     "ws2812": {
         "pin": "F4"
     },

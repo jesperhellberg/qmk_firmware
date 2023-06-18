@@ -35,6 +35,9 @@
   "rgblight": {
     "led_count": 16
   },
+  "rgblight": {
+    "led_count": 16
+  },
   "ws2812": {
     "pin": "D1"
   },
