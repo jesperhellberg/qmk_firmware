@@ -50,6 +50,9 @@
             "twinkle": true
         }
     },
+    "rgblight": {
+        "led_count": 12
+    },
     "ws2812": {
         "pin": "D3"
     },

@@ -36,6 +36,9 @@
             "animation": "rainbow_swirl"
         }
     },
+    "rgblight": {
+        "led_count": 14
+    },
     "ws2812": {
         "pin": "D3"
     },

@@ -28,6 +28,9 @@
             "twinkle": true
         }
     },
+    "rgblight": {
+        "led_count": 19
+    },
     "ws2812": {
         "pin": "D1"
     },

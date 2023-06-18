@@ -22,6 +22,9 @@
     "hue_steps": 10,
     "led_count": 7
   },
+  "rgblight": {
+    "led_count": 7
+  },
   "ws2812": {
     "pin": "B6"
   },
