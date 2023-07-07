@@ -20,6 +20,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <stdio.h>
 #include "keymap_intl.h"
 
+bool lshift = false;
+bool rshift = false;
+
 enum layers {
     BASE, 
 	NUMBER,
@@ -28,12 +31,17 @@ enum layers {
 	LIGHTS
 };
 
+enum jesper_custom_keycodes {
+    JH_DOT = SAFE_RANGE,
+    PROJFIND,
+    JH_COMM,
+    JH_QUOT,
+    JH_SLSH,
+    JH_GRV
+   };
+
 enum combos {
 	JK_ESC
-};
-
-enum custom_keycodes {
-	PROJFIND = SAFE_RANGE,
 };
 
 const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
@@ -45,9 +53,9 @@ combo_t key_combos[COMBO_COUNT] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB, KC_QUOT, KC_COMM,  KC_DOT,    KC_P,    KC_Y,                         KC_F,    KC_G,    KC_C,    KC_R,   KC_L,  KC_SLSH,
+       KC_TAB, JH_QUOT, JH_COMM, JH_DOT,    KC_P,    KC_Y,                         KC_F,    KC_G,    KC_C,    KC_R,   KC_L,   JH_SLSH,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                         KC_D,    KC_H,    KC_T,    KC_N,    KC_S, KC_MINS,
+      KC_LSFT,    KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                         KC_D,    KC_H,    KC_T,    KC_N,    KC_S, SE_MINS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL, GUI_SCL,    KC_Q,    KC_J,    KC_K,    KC_X,                         KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,OSM_SHIFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -58,9 +66,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [NUMBER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_GRV,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSLS,
+       JH_GRV,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSLS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    SE_A,    SE_O,   SE_AE, XXXXXXX, XXXXXXX,                       KC_EQL,    KC_4,    KC_5,    KC_6, XXXXXXX, XXXXXXX,
+      KC_LSFT, SE_TILD, SE_ACUT, XXXXXXX, XXXXXXX, XXXXXXX,                       KC_EQL,    KC_4,    KC_5,    KC_6, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_LBRC,			             KC_RBRC,    KC_1,    KC_2,    KC_3, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -72,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       KC_TILD, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR,   KC_UP, KC_LPRN, KC_RPRN, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    SE_A,    SE_O,   SE_AE, XXXXXXX, XXXXXXX,                       KC_INS, KC_LEFT, KC_DOWN, KC_RGHT, KC_PSCR, KC_VOLU,
+      KC_LSFT, SE_ARNG, SE_ODIA, SE_ADIA, XXXXXXX, XXXXXXX,                       KC_INS, KC_LEFT, KC_DOWN, KC_RGHT, KC_PSCR, KC_VOLU,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       KC_APP, XXXXXXX, XXXXXXX, XXXXXXX,    MUTE, KC_VOLD,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -338,14 +346,36 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     set_keylog(keycode, record);
   }
-  
-  if (keycode == PROJFIND) {
-    if (record->event.pressed) {
-      SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_F1)SS_UP(X_LALT));
-      SEND_STRING("1");
-    }
+
+  switch (keycode) {
+    case PROJFIND:  
+        if (record->event.pressed) {
+            SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_F1)SS_UP(X_LALT));
+            SEND_STRING("1");
+        }
+        return false;
+    case KC_LSFT:
+        if (record->event.pressed) {
+            lshift = true;
+            register_code(KC_LSFT);
+        } else {
+            lshift = false;
+            unregister_code(KC_LSFT);
+        }
+        return false;
+    case JH_DOT:
+        SHIFT_NORM(KC_DOT,SE_LABK);
+    case JH_COMM:
+        SHIFT_NO(KC_COMM,SE_LABK);
+    case JH_QUOT:
+        SHIFT_NORM(KC_NUHS,SE_2);
+    case JH_SLSH:
+        SHIFT_ALL(SE_7,SE_PLUS);
+    case JH_GRV:
+        SHIFT_ALGR(SE_ACUT,SE_DIAE);
+    default:
+        return true;
   } 
-  return true;
 }
 
 
