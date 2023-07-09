@@ -42,6 +42,12 @@ combo_t key_combos[COMBO_COUNT] = {
 	[JK_ESC] = COMBO(jk_combo, KC_ESC)
 };
 
+// turn off leds
+void keyboard_pre_init_user(void) {
+    setPinOutput(24);
+    writePinHigh(24);
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
