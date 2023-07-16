@@ -1,7 +1,18 @@
 #pragma once
 
+// ***** home row mod *****
+#define GUI_A LGUI_T(KC_A)
+#define ALT_O LALT_T(KC_O)
+#define CTRL_E LCTL_T(KC_E)
+#define SFT_U LSFT_T(KC_U)
+#define SFT_H RSFT_T(KC_H)
+#define CTRL_T RCTL_T(KC_T)
+#define ALT_N LALT_T(KC_N)
+#define GUI_S RGUI_T(KC_S)
+
+
+
 #define OSM_SHIFT OSM(MOD_RSFT)
-//#define OSM_CTRL OSM(MOD_LCTL)
 #define GUI_ENT GUI_T(KC_ENT)
 #define OSM_ALT OSM(MOD_LALT)
 #define GUI_SCL GUI_T(KC_SCLN)
@@ -21,7 +32,6 @@
 #define IDEBUG A(S(KC_F9))
 #define IRUN A(S(KC_F10))
 #define IFORMAT A(C(S(KC_L)))
-//#define ICLASS C(S(KC_N))
 #define ICLASS C(KC_N)
 #define GOSUP C(S(A(KC_U)))
 
