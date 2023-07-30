@@ -6,13 +6,22 @@
 #define OSM_SHIFT OSM(MOD_RSFT)
 #define GUI_ENT GUI_T(KC_ENT)
 #define OSM_ALT OSM(MOD_LALT)
-#define GUI_SCL GUI_T(KC_SCLN)
 
 // ***** base layer modifiers
 #define NUM_DEL LT(NUMBER,KC_DEL)
 #define NUM_BSPC LT(NUMBER,KC_BSPC)
 #define SYM_DEL LT(SYMBOL,KC_DEL)
 #define SYM_BSPC LT(SYMBOL,KC_BSPC)
+
+// ***** home row mod *****
+#define GUI_A LGUI_T(KC_A)
+#define ALT_O LALT_T(KC_O)
+#define CTRL_E LCTL_T(KC_E)
+#define SFT_U LSFT_T(KC_U)
+#define SFT_H LSFT_T(KC_H)
+#define CTRL_T RCTL_T(KC_T)
+#define ALT_N LALT_T(KC_N)
+#define GUI_S RGUI_T(KC_S)
 
 
 // ***** IDEA
@@ -70,24 +79,24 @@ return false;
 // Always shifted
 #define SHIFT_ALL(kc1, kc2) \
 if (record->event.pressed) { \
-  register_code(KC_LSFT); \
-  if (lshift || rshift) { \
+  if (get_mods() & MOD_MASK_SHIFT) { \
     unregister_code(kc2); \
     register_code(kc2); \
   } else { \
+    register_code(KC_LSFT); \
     unregister_code(kc1); \
     register_code(kc1); \
+    unregister_code(KC_LSFT); \
   } \
 } else { \
   unregister_code(kc1); \
   unregister_code(kc2); \
-  if (lshift || rshift) \
+  if (get_mods() & MOD_MASK_SHIFT) \
     register_code(KC_LSFT); \
   else \
     unregister_code(KC_LSFT); \
 } \
 return false;
-
 
 // Shift on kc1, AltGr on kc2
 // this needs to unregister it's pressed button

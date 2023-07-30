@@ -37,7 +37,8 @@ enum jesper_custom_keycodes {
     JH_COMM,
     JH_QUOT,
     JH_SLSH,
-    JH_GRV
+    JH_GRV,
+    JH_SCLN
    };
 
 enum combos {
@@ -55,9 +56,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB, JH_QUOT, JH_COMM, JH_DOT,    KC_P,    KC_Y,                         KC_F,    KC_G,    KC_C,    KC_R,   KC_L,   JH_SLSH,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                         KC_D,    KC_H,    KC_T,    KC_N,    KC_S, SE_MINS,
+      KC_LSFT,   GUI_A,   ALT_O,  CTRL_E,   SFT_U,    KC_I,                         KC_D,   SFT_H,  CTRL_T,   ALT_N,    KC_S, SE_MINS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL, GUI_SCL,    KC_Q,    KC_J,    KC_K,    KC_X,                         KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,OSM_SHIFT,
+      KC_LCTL, JH_SCLN,    KC_Q,    KC_J,    KC_K,    KC_X,                         KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,OSM_SHIFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LALT,  KC_SPC,NUM_BSPC,    SYM_DEL,  KC_ENT, MO(IDEA)
                                       //`--------------------------'  `--------------------------'
@@ -373,6 +374,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SHIFT_ALL(SE_7,SE_PLUS);
     case JH_GRV:
         SHIFT_ALGR(SE_ACUT,SE_DIAE);
+    case JH_SCLN:
+        SHIFT_ALL(SE_COMM,SE_DOT);
     default:
         return true;
   } 
