@@ -32,7 +32,6 @@
 #define IDEBUG A(S(KC_F9))
 #define IRUN A(S(KC_F10))
 #define IFORMAT A(C(S(KC_L)))
-#define ICLASS C(KC_N)
 #define GOSUP C(S(A(KC_U)))
 
 #define MUTE C(S(KC_M))
