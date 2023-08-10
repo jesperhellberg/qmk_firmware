@@ -11,11 +11,9 @@
 #define GUI_S RGUI_T(KC_S)
 
 
-
 #define OSM_SHIFT OSM(MOD_RSFT)
 #define GUI_ENT GUI_T(KC_ENT)
 #define OSM_ALT OSM(MOD_LALT)
-#define GUI_SCL GUI_T(KC_SCLN)
 
 // ***** base layer modifiers
 #define NUM_DEL LT(NUMBER,KC_DEL)
