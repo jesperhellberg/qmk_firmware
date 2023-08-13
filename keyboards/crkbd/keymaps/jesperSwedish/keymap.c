@@ -24,7 +24,7 @@ bool lshift = false;
 bool rshift = false;
 
 enum layers {
-    BASE, 
+    BASE,
 	NUMBER,
 	SYMBOL,
 	IDEA,
@@ -93,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
      PROJFIND,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,  ICLASS, XXXXXXX, XXXXXXX,   GOSUP, IFORMAT,                      XXXXXXX, XXXXXXX, XXXXXXX,  IDEBUG,    IRUN,  KC_F12,
+      KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX,   GOSUP, IFORMAT,                      XXXXXXX, XXXXXXX, XXXXXXX,  IDEBUG,    IRUN,  KC_F12,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -116,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifdef RGB_MATRIX_ENABLE
 
-    #define PINK {HSV_PINK} 
+    #define PINK {HSV_PINK}
     #define RED {HSV_RED}
     #define BLUE {HSV_BLUE}
     #define MAGENTA {HSV_MAGENTA}
@@ -198,7 +198,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ledIndex = ledIndexForKeymapIndex(keyIndex);
 
         if (ledIndex >= led_min && ledIndex <= led_max) {
-            // Currently using same colors for all layers, 
+            // Currently using same colors for all layers,
             // replace sLayer with layerNum to set colors for each layer
 	    HSV hsv = { .h = pgm_read_byte(&ledmap[sLayer][keyIndex][0]),
                .s = pgm_read_byte(&ledmap[sLayer][keyIndex][1]),
@@ -212,7 +212,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     HSV bkgrd;
     switch (layerNum) {
       case BASE:
-       bkgrd = (HSV){HSV_RED}; 
+       bkgrd = (HSV){HSV_RED};
        break;
       case NUMBER:
        bkgrd = (HSV){HSV_PURPLE};
@@ -349,7 +349,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 
   switch (keycode) {
-    case PROJFIND:  
+    case PROJFIND:
         if (record->event.pressed) {
             SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_F1)SS_UP(X_LALT));
             SEND_STRING("1");
@@ -378,7 +378,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SHIFT_ALL(SE_COMM,SE_DOT);
     default:
         return true;
-  } 
+  }
 }
 
 
