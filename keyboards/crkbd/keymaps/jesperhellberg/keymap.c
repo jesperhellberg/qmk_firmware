@@ -61,6 +61,12 @@ combo_t key_combos[COMBO_COUNT] = {
     PINK, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, PINK,
 		PINK, PINK, PINK, 				PINK, PINK, PINK
 			},
+  [NAV] = {
+    PINK, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, PINK,
+    PINK, BLUE, BLUE, BLUE, RED, BLUE, 				BLUE, RED, BLUE, BLUE, BLUE, PINK,
+    PINK, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, PINK,
+		PINK, PINK, PINK, 				PINK, PINK, PINK
+			},
   [IDEA] = {
     PURPLE, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, PURPLE,
     PURPLE, BLUE, BLUE, BLUE, RED, BLUE, 				BLUE, RED, BLUE, BLUE, BLUE, PURPLE,
@@ -136,6 +142,9 @@ combo_t key_combos[COMBO_COUNT] = {
        bkgrd = (HSV){HSV_PURPLE};
        break;
       case SYMBOL:
+       bkgrd = (HSV){HSV_MAGENTA};
+       break;
+      case NAV:
        bkgrd = (HSV){HSV_MAGENTA};
        break;
       case IDEA:
