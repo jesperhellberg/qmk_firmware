@@ -20,9 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <stdio.h>
 #include "keycode_aliases.h"
 
-bool lshift = false;
-bool rshift = false;
-
 enum layers {
     BASE,
 	NUMBER,
@@ -353,15 +350,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (record->event.pressed) {
             SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_F1)SS_UP(X_LALT));
             SEND_STRING("1");
-        }
-        return false;
-    case KC_LSFT:
-        if (record->event.pressed) {
-            lshift = true;
-            register_code(KC_LSFT);
-        } else {
-            lshift = false;
-            unregister_code(KC_LSFT);
         }
         return false;
     case JH_DOT:

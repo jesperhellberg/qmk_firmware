@@ -33,13 +33,10 @@
 #define MUTE C(S(KC_M))
 
 
-extern bool lshift;
-extern bool rshift;
-
 // Normal shift
 #define SHIFT_NORM(kc1, kc2) \
 if (record->event.pressed) { \
-  if (lshift || rshift) { \
+  if (get_mods() & MOD_MASK_SHIFT) { \
     register_code(KC_LSFT); \
     unregister_code(kc2); \
     register_code(kc2); \
@@ -57,18 +54,19 @@ return false;
 // Never shifted
 #define SHIFT_NO(kc1, kc2) \
 if (record->event.pressed) { \
-  unregister_code(KC_LSFT); \
-  if (lshift || rshift) { \
+  if (get_mods() & MOD_MASK_SHIFT) { \
+    unregister_code(KC_LSFT); \
     unregister_code(kc2); \
     register_code(kc2); \
   } else { \
+    unregister_code(KC_LSFT); \
     unregister_code(kc1); \
     register_code(kc1); \
   } \
 } else { \
   unregister_code(kc1); \
   unregister_code(kc2); \
-  if (lshift || rshift) \
+  if (get_mods() & MOD_MASK_SHIFT) \
     register_code(KC_LSFT); \
   else \
     unregister_code(KC_LSFT); \
@@ -101,7 +99,7 @@ return false;
 // this needs to unregister it's pressed button
 #define SHIFT_ALGR(kc1, kc2) \
 if (record->event.pressed) { \
-  if (lshift || rshift) { \
+  if (get_mods() & MOD_MASK_SHIFT) { \
     unregister_code(KC_LSFT); \
     register_code(KC_RALT); \
     register_code(kc2); \
@@ -116,7 +114,7 @@ if (record->event.pressed) { \
   if (get_mods() & MOD_BIT(KC_RALT)) { \
     unregister_code(KC_RALT); \
   } \
-  if (lshift || rshift)  \
+  if (get_mods() & MOD_MASK_SHIFT) \
     register_code(KC_LSFT); \
   else \
     unregister_code(KC_LSFT); \
