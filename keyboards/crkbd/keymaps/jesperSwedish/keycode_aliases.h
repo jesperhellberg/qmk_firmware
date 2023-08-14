@@ -96,17 +96,18 @@ if (record->event.pressed) { \
 return false;
 
 // Shift on kc1, AltGr on kc2
-// this needs to unregister it's pressed button
 #define SHIFT_ALGR(kc1, kc2) \
 if (record->event.pressed) { \
   if (get_mods() & MOD_MASK_SHIFT) { \
-    unregister_code(KC_LSFT); \
+    clear_mods(); \
     register_code(KC_RALT); \
     register_code(kc2); \
+    register_code(KC_LSFT); \
   } else { \
     clear_mods(); \
     register_code(KC_LSFT); \
     register_code(kc1); \
+    unregister_code(KC_LSFT); \
   } \
 } else { \
   unregister_code(kc1); \
