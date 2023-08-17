@@ -19,7 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 #include <stdio.h>
 #include "keycode_aliases.h"
-#include "/home/jesper/qmk_firmware/jesperKeymap/generalSwedish.h"
+#include "../../../jesperKeymap/generalSwedish.h"
+//#include "/home/jesper/qmk_firmware/jesperKeymap/generalSwedish.h"
 
 enum combos {
 	JK_ESC
@@ -56,6 +57,12 @@ combo_t key_combos[COMBO_COUNT] = {
 		MAGENTA, MAGENTA, MAGENTA, 				MAGENTA, MAGENTA, MAGENTA
 			},
   [SYMBOL] = {
+    PINK, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, PINK,
+    PINK, BLUE, BLUE, BLUE, RED, BLUE, 				BLUE, RED, BLUE, BLUE, BLUE, PINK,
+    PINK, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, PINK,
+		PINK, PINK, PINK, 				PINK, PINK, PINK
+			},
+  [NAV] = {
     PINK, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, PINK,
     PINK, BLUE, BLUE, BLUE, RED, BLUE, 				BLUE, RED, BLUE, BLUE, BLUE, PINK,
     PINK, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, PINK,
@@ -138,6 +145,9 @@ combo_t key_combos[COMBO_COUNT] = {
       case SYMBOL:
        bkgrd = (HSV){HSV_MAGENTA};
        break;
+       case NAV:
+        bkgrd = (HSV){HSV_MAGENTA};
+        break;
       case IDEA:
        bkgrd = (HSV){HSV_PINK};
        break;
@@ -164,11 +174,6 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   return rotation;
 }
 
-//#define L_BASE 0
-//#define L_LOWER 2
-//#define L_RAISE 4
-//#define L_ADJUST 8
-
 void oled_render_layer_state(void) {
     oled_write_P(PSTR("Layer: "), false);
     switch (get_highest_layer(layer_state|default_layer_state)) {
@@ -181,6 +186,9 @@ void oled_render_layer_state(void) {
         case SYMBOL:
             oled_write_ln_P(PSTR("Symbols"), false);
             break;
+         case NAV:
+            oled_write_ln_P(PSTR("Navigation"), false);
+            break;
         case IDEA:
             oled_write_ln_P(PSTR("Idea"), false);
             break;
@@ -189,11 +197,6 @@ void oled_render_layer_state(void) {
             break;
         default:
             oled_write_ln_P(PSTR("Unknown"), false);
-//        case L_ADJUST|L_LOWER:
-//        case L_ADJUST|L_RAISE:
-//        case L_ADJUST|L_LOWER|L_RAISE:
-//            oled_write_ln_P(PSTR("Adjust"), false);
-//            break;
     }
 }
 
