@@ -4,6 +4,7 @@ enum layers {
     BASE,
 	NUMBER,
 	SYMBOL,
+	NAV,
 	IDEA,
 	LIGHTS
 };
@@ -27,7 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL, JH_SCLN,    KC_Q,    KC_J,    KC_K,    KC_X,                         KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,OSM_SHIFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LALT,  KC_SPC,NUM_BSPC,    SYM_DEL,  KC_ENT, MO(IDEA)
+                                          MO(NAV),  KC_SPC,NUM_BSPC,    SYM_DEL,  KC_ENT, MO(IDEA)
                                       //`--------------------------'  `--------------------------'
 
   ),
@@ -51,6 +52,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_LSFT, SE_ARNG, SE_ODIA, SE_ADIA, XXXXXXX, XXXXXXX,                       KC_INS, KC_LEFT, KC_DOWN, KC_RGHT, KC_PSCR, KC_VOLU,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       KC_APP, XXXXXXX, XXXXXXX, XXXXXXX,    MUTE, KC_VOLD,
+  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                          _______, _______,_______,     _______, _______, _______
+                                      //`--------------------------'  `--------------------------'
+  ),
+
+  [NAV] = LAYOUT_split_3x6_3(
+  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       KC_INS, KC_PGUP,   KC_UP, XXXXXXX, XXXXXXX, XXXXXXX,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,                      KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT,  KC_END, KC_VOLU,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, KC_PGDN, XXXXXXX, XXXXXXX,    MUTE, KC_VOLD,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______,_______,     _______, _______, _______
                                       //`--------------------------'  `--------------------------'
