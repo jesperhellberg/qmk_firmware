@@ -19,7 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 #include <stdio.h>
 #include "keycode_aliases.h"
-#include "/home/jesper/qmk_firmware/jesperKeymap/generalCorne.h"
+#include "../../../jesperKeymap/generalCorne.h"
+//#include "/home/jesper/qmk_firmware/jesperKeymap/generalCorne.h"
 
 
 enum combos {
@@ -173,11 +174,6 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   return rotation;
 }
 
-//#define L_BASE 0
-//#define L_LOWER 2
-//#define L_RAISE 4
-//#define L_ADJUST 8
-
 void oled_render_layer_state(void) {
     oled_write_P(PSTR("Layer: "), false);
     switch (get_highest_layer(layer_state|default_layer_state)) {
@@ -190,6 +186,9 @@ void oled_render_layer_state(void) {
         case SYMBOL:
             oled_write_ln_P(PSTR("Symbols"), false);
             break;
+        case NAV:
+            oled_write_ln_P(PSTR("Navigation"), false);
+            break;
         case IDEA:
             oled_write_ln_P(PSTR("Idea"), false);
             break;
@@ -198,11 +197,6 @@ void oled_render_layer_state(void) {
             break;
         default:
             oled_write_ln_P(PSTR("Unknown"), false);
-//        case L_ADJUST|L_LOWER:
-//        case L_ADJUST|L_RAISE:
-//        case L_ADJUST|L_LOWER|L_RAISE:
-//            oled_write_ln_P(PSTR("Adjust"), false);
-//            break;
     }
 }
 
