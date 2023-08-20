@@ -95,29 +95,24 @@ if (record->event.pressed) { \
 } \
 return false;
 
-// Shift on kc1, AltGr on kc2
-#define SHIFT_ALGR(kc1, kc2) \
+#define BACKTICK() \
 if (record->event.pressed) { \
-  if (get_mods() & MOD_MASK_SHIFT) { \
-    clear_mods(); \
-    register_code(KC_RALT); \
-    register_code(kc2); \
     register_code(KC_LSFT); \
-  } else { \
-    clear_mods(); \
-    register_code(KC_LSFT); \
-    register_code(kc1); \
-    unregister_code(KC_LSFT); \
-  } \
+    register_code(SE_ACUT); \
+    register_code(KC_SPC); \
 } else { \
-  unregister_code(kc1); \
-  unregister_code(kc2); \
-  if (get_mods() & MOD_BIT(KC_RALT)) { \
-    unregister_code(KC_RALT); \
-  } \
-  if (get_mods() & MOD_MASK_SHIFT) \
-    register_code(KC_LSFT); \
-  else \
-    unregister_code(KC_LSFT); \
+    clear_mods(); \
+    unregister_code(KC_SPC); \
+} \
+return false;
+
+#define TILDE() \
+if (record->event.pressed) { \
+    register_code(KC_RALT); \
+    register_code(SE_DIAE); \
+    register_code(KC_SPC); \
+} else { \
+    clear_mods(); \
+    unregister_code(KC_SPC); \
 } \
 return false;
