@@ -18,9 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 #include <stdio.h>
-#include "keycode_aliases.h"
+#include "../../../jesperKeymap/keycode_aliases_se.h"
 #include "../../../jesperKeymap/generalSwedish.h"
-//#include "/home/jesper/qmk_firmware/jesperKeymap/generalSwedish.h"
 
 enum combos {
 	JK_ESC
