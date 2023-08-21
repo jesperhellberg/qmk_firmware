@@ -32,6 +32,7 @@
 
 #define MUTE C(S(KC_M))
 
+
 // Normal shift
 #define SHIFT_NORM(kc1, kc2) \
 if (record->event.pressed) { \
@@ -98,6 +99,7 @@ return false;
 if (record->event.pressed) { \
     register_code(KC_LSFT); \
     register_code(SE_ACUT); \
+    unregister_code(KC_LSFT); \
     register_code(KC_SPC); \
 } else { \
     clear_mods(); \
@@ -109,6 +111,7 @@ return false;
 if (record->event.pressed) { \
     register_code(KC_RALT); \
     register_code(SE_DIAE); \
+    unregister_code(KC_RALT); \
     register_code(KC_SPC); \
 } else { \
     clear_mods(); \
