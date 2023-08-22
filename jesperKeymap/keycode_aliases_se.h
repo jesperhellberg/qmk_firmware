@@ -95,6 +95,25 @@ if (record->event.pressed) { \
 } \
 return false;
 
+#define SLASH(kc1, kc2) \
+if (record->event.pressed) { \
+  if (get_mods() & MOD_MASK_SHIFT) { \
+    unregister_code(kc2); \
+    register_code(kc2); \
+  } else { \
+    unregister_code(kc1); \
+    register_code(kc1); \
+  } \
+} else { \
+  unregister_code(kc1); \
+  unregister_code(kc2); \
+  if (get_mods() & MOD_MASK_SHIFT) \
+    register_code(KC_LSFT); \
+  else \
+    unregister_code(KC_LSFT); \
+} \
+return false
+
 #define BACKTICK() \
 if (record->event.pressed) { \
     register_code(KC_LSFT); \
