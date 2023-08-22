@@ -52,7 +52,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case JH_QUOT:
         SHIFT_NORM(KC_NUHS,SE_2);
     case JH_SLSH:
-        SHIFT_ALL(SE_7,SE_PLUS);
+        SLASH(KC_PSLS,SE_PLUS);
     case JH_SCLN:
         SHIFT_ALL(SE_COMM,SE_DOT);
     case JH_BTCK:
