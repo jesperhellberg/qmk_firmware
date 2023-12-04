@@ -58,6 +58,7 @@ if (record->event.pressed) { \
     unregister_code(KC_LSFT); \
     unregister_code(kc2); \
     register_code(kc2); \
+    register_code(KC_LSFT); \
   } else { \
     unregister_code(KC_LSFT); \
     unregister_code(kc1); \
