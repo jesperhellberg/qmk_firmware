@@ -21,8 +21,7 @@
 #define SFT_H LSFT_T(KC_H)
 #define CTRL_T RCTL_T(KC_T)
 #define ALT_N LALT_T(KC_N)
-#define GUI_S RGUI_T(KC_S)
-
+#define GUI_S LGUI_T(KC_S)
 
 // ***** IDEA
 #define IDEBUG A(S(KC_F9))
