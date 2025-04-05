@@ -168,31 +168,33 @@ combo_t key_combos[COMBO_COUNT] = {
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (!is_keyboard_master()) {
-    return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
+    return OLED_ROTATION_180;
   }
-  return rotation;
+  return OLED_ROTATION_270;
 }
 
 void oled_render_layer_state(void) {
-    oled_write_P(PSTR("Layer: "), false);
+    oled_set_cursor(0, 4);
+    oled_write_P(PSTR("Layer"), false);
+    oled_set_cursor(0, 6);
     switch (get_highest_layer(layer_state|default_layer_state)) {
         case BASE:
-            oled_write_ln_P(PSTR("Default"), false);
+            oled_write_ln_P(PSTR("BASE"), false);
             break;
         case NUMBER:
-            oled_write_ln_P(PSTR("Numbers"), false);
+            oled_write_ln_P(PSTR("NBRS"), false);
             break;
         case SYMBOL:
-            oled_write_ln_P(PSTR("Symbols"), false);
+            oled_write_ln_P(PSTR("SYMBL"), false);
             break;
          case NAV:
-            oled_write_ln_P(PSTR("Navigation"), false);
+            oled_write_ln_P(PSTR("NAV"), false);
             break;
         case IDEA:
-            oled_write_ln_P(PSTR("Idea"), false);
+            oled_write_ln_P(PSTR("IDEA"), false);
             break;
         case LIGHTS:
-            oled_write_ln_P(PSTR("Lights"), false);
+            oled_write_ln_P(PSTR("LIGHT"), false);
             break;
         default:
             oled_write_ln_P(PSTR("Unknown"), false);
@@ -219,12 +221,13 @@ void set_keylog(uint16_t keycode, keyrecord_t *record) {
   }
 
   // update keylog
-  snprintf(keylog_str, sizeof(keylog_str), "%dx%d, k%2d : %c",
+  snprintf(keylog_str, sizeof(keylog_str), "%dx%d  k%2d  %c",
            record->event.key.row, record->event.key.col,
            keycode, name);
 }
 
 void oled_render_keylog(void) {
+    oled_set_cursor(0, 12);
     oled_write(keylog_str, false);
 }
 
