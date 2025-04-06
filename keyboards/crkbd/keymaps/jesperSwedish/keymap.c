@@ -42,43 +42,11 @@ combo_t key_combos[COMBO_COUNT] = {
     #define ORANGE {HSV_ORANGE}
 
   // Currently only the base layer is read. Change in rgb_matrix_indicators_advanced_user() to use all layers.
-  const uint8_t PROGMEM ledmap[][42][3] = {
-  [BASE] = {
+  const uint8_t PROGMEM ledmap[][3] = {
     RED, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, RED,
     RED, BLUE, BLUE, BLUE, RED, BLUE, 				BLUE, RED, BLUE, BLUE, BLUE, RED,
     RED, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, RED,
 		RED, RED, RED, 				RED, RED, RED
-			},
-  [NUMBER] = {
-    MAGENTA, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, MAGENTA,
-    MAGENTA, BLUE, BLUE, BLUE, RED, BLUE, 				BLUE, RED, BLUE, BLUE, BLUE, MAGENTA,
-    MAGENTA, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, MAGENTA,
-		MAGENTA, MAGENTA, MAGENTA, 				MAGENTA, MAGENTA, MAGENTA
-			},
-  [SYMBOL] = {
-    PINK, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, PINK,
-    PINK, BLUE, BLUE, BLUE, RED, BLUE, 				BLUE, RED, BLUE, BLUE, BLUE, PINK,
-    PINK, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, PINK,
-		PINK, PINK, PINK, 				PINK, PINK, PINK
-			},
-  [NAV] = {
-    PINK, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, PINK,
-    PINK, BLUE, BLUE, BLUE, RED, BLUE, 				BLUE, RED, BLUE, BLUE, BLUE, PINK,
-    PINK, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, PINK,
-		PINK, PINK, PINK, 				PINK, PINK, PINK
-			},
-  [IDEA] = {
-    PURPLE, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, PURPLE,
-    PURPLE, BLUE, BLUE, BLUE, RED, BLUE, 				BLUE, RED, BLUE, BLUE, BLUE, PURPLE,
-    PURPLE, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, PURPLE,
-		PURPLE, PURPLE, PURPLE, 				PURPLE, PURPLE, PURPLE
-			},
-  [LIGHTS] = {
-    ORANGE, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, ORANGE,
-    ORANGE, BLUE, BLUE, BLUE, RED, BLUE, 				BLUE, RED, BLUE, BLUE, BLUE, ORANGE,
-    ORANGE, BLUE, BLUE, BLUE, BLUE, BLUE, 				BLUE, BLUE, BLUE, BLUE, BLUE, ORANGE,
-		ORANGE, ORANGE, ORANGE, 				ORANGE, ORANGE, ORANGE
-			},
   };
 
 
@@ -114,7 +82,6 @@ combo_t key_combos[COMBO_COUNT] = {
 
   bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     uint8_t layerNum = get_highest_layer(layer_state);
-    uint8_t sLayer = 0;
 
     // Per-key indicators
     uint8_t ledIndex = 0;
@@ -122,10 +89,8 @@ combo_t key_combos[COMBO_COUNT] = {
         ledIndex = ledIndexForKeymapIndex(keyIndex);
 
         if (ledIndex >= led_min && ledIndex <= led_max) {
-            // Currently using same colors for all layers,
-            // replace sLayer with layerNum to set colors for each layer
-	    HSV hsv = { .h = pgm_read_byte(&ledmap[sLayer][keyIndex][0]),
-               .s = pgm_read_byte(&ledmap[sLayer][keyIndex][1]),
+	    HSV hsv = { .h = pgm_read_byte(&ledmap[keyIndex][0]),
+               .s = pgm_read_byte(&ledmap[keyIndex][1]),
                .v = rgb_matrix_get_val() };
 	    RGB rgb = hsv_to_rgb(hsv);
 	    rgb_matrix_set_color(ledIndex, rgb.r, rgb.g, rgb.b);
