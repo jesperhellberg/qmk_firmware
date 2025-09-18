@@ -8,10 +8,10 @@
 #define OSM_ALT OSM(MOD_LALT)
 
 // ***** base layer modifiers
-#define NUM_DEL LT(NUMBER,KC_DEL)
-#define NUM_BSPC LT(NUMBER,KC_BSPC)
-#define SYM_DEL LT(SYMBOL,KC_DEL)
-#define SYM_BSPC LT(SYMBOL,KC_BSPC)
+#define NUM_DEL LT(NUMBER, KC_DEL)
+#define NUM_BSPC LT(NUMBER, KC_BSPC)
+#define SYM_DEL LT(SYMBOL, KC_DEL)
+#define SYM_BSPC LT(SYMBOL, KC_BSPC)
 
 // ***** home row mod *****
 #define GUI_A LGUI_T(KC_A)
@@ -31,109 +31,103 @@
 
 #define MUTE C(S(KC_M))
 
-
 // Normal shift
-#define SHIFT_NORM(kc1, kc2) \
-if (record->event.pressed) { \
-  if (get_mods() & MOD_MASK_SHIFT) { \
-    register_code(KC_LSFT); \
-    unregister_code(kc2); \
-    register_code(kc2); \
-  } else { \
-    unregister_code(KC_LSFT); \
-    unregister_code(kc1); \
-    register_code(kc1); \
-  } \
-} else { \
-  unregister_code(kc1); \
-  unregister_code(kc2); \
-} \
-return false;
+#define SHIFT_NORM(kc1, kc2)               \
+    if (record->event.pressed) {           \
+        if (get_mods() & MOD_MASK_SHIFT) { \
+            register_code(KC_LSFT);        \
+            unregister_code(kc2);          \
+            register_code(kc2);            \
+        } else {                           \
+            unregister_code(KC_LSFT);      \
+            unregister_code(kc1);          \
+            register_code(kc1);            \
+        }                                  \
+    } else {                               \
+        unregister_code(kc1);              \
+        unregister_code(kc2);              \
+    }                                      \
+    return false;
 
 // Never shifted
-#define SHIFT_NO(kc1, kc2) \
-if (record->event.pressed) { \
-  if (get_mods() & MOD_MASK_SHIFT) { \
-    unregister_code(KC_LSFT); \
-    unregister_code(kc2); \
-    register_code(kc2); \
-    register_code(KC_LSFT); \
-  } else { \
-    unregister_code(KC_LSFT); \
-    unregister_code(kc1); \
-    register_code(kc1); \
-  } \
-} else { \
-  unregister_code(kc1); \
-  unregister_code(kc2); \
-  if (get_mods() & MOD_MASK_SHIFT) \
-    register_code(KC_LSFT); \
-  else \
-    unregister_code(KC_LSFT); \
-} \
-return false;
+#define SHIFT_NO(kc1, kc2)                 \
+    if (record->event.pressed) {           \
+        if (get_mods() & MOD_MASK_SHIFT) { \
+            unregister_code(KC_LSFT);      \
+            unregister_code(kc2);          \
+            register_code(kc2);            \
+            register_code(KC_LSFT);        \
+        } else {                           \
+            unregister_code(KC_LSFT);      \
+            unregister_code(kc1);          \
+            register_code(kc1);            \
+        }                                  \
+    } else {                               \
+        unregister_code(kc1);              \
+        unregister_code(kc2);              \
+        if (get_mods() & MOD_MASK_SHIFT)   \
+            register_code(KC_LSFT);        \
+        else                               \
+            unregister_code(KC_LSFT);      \
+    }                                      \
+    return false;
 
 // Always shifted
-#define SHIFT_ALL(kc1, kc2) \
-if (record->event.pressed) { \
-  if (get_mods() & MOD_MASK_SHIFT) { \
-    unregister_code(kc2); \
-    register_code(kc2); \
-  } else { \
-    register_code(KC_LSFT); \
-    unregister_code(kc1); \
-    register_code(kc1); \
-    unregister_code(KC_LSFT); \
-  } \
-} else { \
-  unregister_code(kc1); \
-  unregister_code(kc2); \
-  if (get_mods() & MOD_MASK_SHIFT) \
-    register_code(KC_LSFT); \
-  else \
-    unregister_code(KC_LSFT); \
-} \
-return false;
+#define SHIFT_ALL(kc1, kc2)                \
+    if (record->event.pressed) {           \
+        if (get_mods() & MOD_MASK_SHIFT) { \
+            unregister_code(kc2);          \
+            register_code(kc2);            \
+        } else {                           \
+            register_code(KC_LSFT);        \
+            unregister_code(kc1);          \
+            register_code(kc1);            \
+            unregister_code(KC_LSFT);      \
+        }                                  \
+    } else {                               \
+        unregister_code(kc1);              \
+        unregister_code(kc2);              \
+        if (get_mods() & MOD_MASK_SHIFT)   \
+            register_code(KC_LSFT);        \
+        else                               \
+            unregister_code(KC_LSFT);      \
+    }                                      \
+    return false;
 
-#define SLASH(kc1, kc2) \
-if (record->event.pressed) { \
-  if (get_mods() & MOD_MASK_SHIFT) { \
-    unregister_code(kc2); \
-    register_code(kc2); \
-  } else { \
-    unregister_code(kc1); \
-    register_code(kc1); \
-  } \
-} else { \
-  unregister_code(kc1); \
-  unregister_code(kc2); \
-  if (get_mods() & MOD_MASK_SHIFT) \
-    register_code(KC_LSFT); \
-  else \
-    unregister_code(KC_LSFT); \
-} \
-return false
+#define SLASH(kc1, kc2)                    \
+    if (record->event.pressed) {           \
+        if (get_mods() & MOD_MASK_SHIFT) { \
+            unregister_code(kc2);          \
+            register_code(kc2);            \
+        } else {                           \
+            unregister_code(kc1);          \
+            register_code(kc1);            \
+        }                                  \
+    } else {                               \
+        unregister_code(kc1);              \
+        unregister_code(kc2);              \
+        if (get_mods() & MOD_MASK_SHIFT)   \
+            register_code(KC_LSFT);        \
+        else                               \
+            unregister_code(KC_LSFT);      \
+    }                                      \
+    return false
 
-#define BACKTICK() \
-if (record->event.pressed) { \
-    register_code(KC_LSFT); \
-    register_code(SE_ACUT); \
-    unregister_code(KC_LSFT); \
-    register_code(KC_SPC); \
-} else { \
-    clear_mods(); \
-    unregister_code(KC_SPC); \
-} \
-return false;
+#define BACKTICK()               \
+    if (record->event.pressed) { \
+        tap_code16(SE_GRV);      \
+        tap_code16(KC_SPC);      \
+    }                            \
+    return false;
 
-#define TILDE() \
-if (record->event.pressed) { \
-    register_code(KC_RALT); \
-    register_code(SE_DIAE); \
-    unregister_code(KC_RALT); \
-    register_code(KC_SPC); \
-} else { \
-    clear_mods(); \
-    unregister_code(KC_SPC); \
-} \
-return false;
+#define TILDE()                   \
+    if (record->event.pressed) {  \
+        register_code(KC_RALT);   \
+        register_code(SE_DIAE);   \
+        unregister_code(KC_RALT); \
+        register_code(KC_SPC);    \
+    } else {                      \
+        clear_mods();             \
+        unregister_code(KC_SPC);  \
+    }                             \
+    return false;
