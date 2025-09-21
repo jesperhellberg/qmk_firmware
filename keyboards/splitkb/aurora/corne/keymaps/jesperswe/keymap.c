@@ -38,7 +38,7 @@ void keyboard_pre_init_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
+switch (keycode) {
     case PROJFIND:
         if (record->event.pressed) {
             SEND_STRING(SS_DOWN(X_LALT)SS_TAP(X_F1)SS_UP(X_LALT));
@@ -47,18 +47,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     case JH_DOT:
         SHIFT_NORM(KC_DOT,SE_LABK);
+        break;
     case JH_COMM:
         SHIFT_NO(KC_COMM,SE_LABK);
+        break;
     case JH_QUOT:
         SHIFT_NORM(KC_NUHS,SE_2);
+        break;
     case JH_SLSH:
         SLASH(KC_PSLS,SE_PLUS);
+        break;
     case JH_SCLN:
         SHIFT_ALL(SE_COMM,SE_DOT);
+        break;
     case JH_BTCK:
         BACKTICK();
+        break;
     case JH_TILD:
         TILDE();
+        break;
     default:
         return true;
   }
