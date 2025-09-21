@@ -123,11 +123,8 @@
 #define TILDE()                   \
     if (record->event.pressed) {  \
         register_code(KC_RALT);   \
-        register_code(SE_DIAE);   \
+        tap_code16(SE_DIAE);      \
         unregister_code(KC_RALT); \
-        register_code(KC_SPC);    \
-    } else {                      \
-        clear_mods();             \
-        unregister_code(KC_SPC);  \
+        tap_code16(KC_SPC);       \
     }                             \
     return false;
